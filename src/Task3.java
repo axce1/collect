@@ -1,11 +1,15 @@
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class Task3 {
     public static void main(String[] args) {
-        List<Integer> data = Arrays.asList(4, 4, 5, 6, 7);
+        
+        int n = args.length;
+        Integer[] data = new Integer[n];
+        for (int i = 0; i < n; i++) {
+            data[i] = Integer.valueOf(args[i]);
+        }
+
         Set<Integer> found = new HashSet<>();
         Set<Integer> dupl = new HashSet<>();
         for (Integer digit :
@@ -19,7 +23,8 @@ public class Task3 {
 
         if(dupl.size() != 0) {
             System.out.println("true");
-        }
+        } else {
         System.out.println("false");
+        }
     }
 }
