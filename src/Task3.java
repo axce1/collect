@@ -1,31 +1,37 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Task3 {
-    public static void main(String[] args) {
-        
-        int n = args.length;
-        Integer[] data = new Integer[n];
-        for (int i = 0; i < n; i++) {
-            data[i] = Integer.valueOf(args[i]);
-        }
-
+    public static void findDuplicates(List<Integer> data) {
         Set<Integer> found = new HashSet<>();
-        Set<Integer> dupl = new HashSet<>();
+        Map<Integer, Integer> hashMap = new HashMap<>();
         for (Integer digit :
                 data) {
             if (found.contains(digit)) {
-                dupl.add(digit);
+                if(hashMap.containsKey(digit)) {
+                    hashMap.put(digit, hashMap.get(digit) + 1);
+                }
             } else {
                 found.add(digit);
+                hashMap.put(digit, 1);
             }
         }
 
-        if(dupl.size() != 0) {
+        if(hashMap.size() != 0) {
             System.out.println("true");
+            for(Map.Entry<Integer, Integer> entry : hashMap.entrySet()) {
+                if (entry.getValue() > 1) {
+                    System.out.println(
+                            "Число " + entry.getKey() + " повторяется " + entry.getValue() + " раз"
+                    );
+                }
+            }
         } else {
-        System.out.println("false");
+            System.out.println("false");
+            System.out.println("No find duplicates");
         }
+    }
+    public static void main(String[] args) {
+        List<Integer> data = Arrays.asList(3, 3, 3, 4, 5, 6, 7, 3, 7, 7);
+        findDuplicates(data);
     }
 }
